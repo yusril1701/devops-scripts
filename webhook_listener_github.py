@@ -11,7 +11,7 @@ APP_REPOS = {
     "app1": "/app/sindimawa"
 }
 
-@app.route("/webhook/<app_name>", methods=["POST"])
+@app.route("/<app_name>", methods=["POST"])
 def webhook(app_name):
     # Validasi apakah app_name dikenal
     if app_name not in APP_REPOS:
