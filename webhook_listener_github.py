@@ -8,8 +8,7 @@ app = Flask(__name__)
 SECRET = b'2f43de3f51e76b93f88a5ab7c37b7b84d1e726bcbbf934f1ae64a9b412874b02'
 
 APP_REPOS = {
-    "app1": "/app/repos/app1",
-    "app2": "/app/repos/app2"
+    "app1": "/app/sindimawa"
 }
 
 @app.route("/webhook/<app_name>", methods=["POST"])
