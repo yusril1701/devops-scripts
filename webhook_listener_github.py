@@ -17,23 +17,21 @@ def webhook(app_name):
     if app_name not in APP_REPOS:
         return f"Unknown app: {app_name}", 404
 
-    # Ambil signature dari header
-    signature = request.headers.get('X-Hub-Signature-256')
-    if not signature:
-        return "Missing signature", 403
+    # [Nonaktifkan sementara verifikasi signature]
+    # signature = request.headers.get('X-Hub-Signature-256')
+    # if not signature:
+    #     return "Missing signature", 403
 
-    # Validasi format signature
-    try:
-        sha_name, signature = signature.split('=')
-        if sha_name != 'sha256':
-            return "Unsupported signature method", 400
-    except ValueError:
-        return "Invalid signature format", 400
+    # try:
+    #     sha_name, signature = signature.split('=')
+    #     if sha_name != 'sha256':
+    #         return "Unsupported signature method", 400
+    # except ValueError:
+    #     return "Invalid signature format", 400
 
-    # Validasi signature menggunakan HMAC
-    mac = hmac.new(SECRET, msg=request.data, digestmod=hashlib.sha256)
-    if not hmac.compare_digest(mac.hexdigest(), signature):
-        return "Invalid signature", 403
+    # mac = hmac.new(SECRET, msg=request.data, digestmod=hashlib.sha256)
+    # if not hmac.compare_digest(mac.hexdigest(), signature):
+    #     return "Invalid signature", 403
 
     # Jalankan git pull untuk direktori aplikasi yang sesuai
     repo_path = APP_REPOS[app_name]
